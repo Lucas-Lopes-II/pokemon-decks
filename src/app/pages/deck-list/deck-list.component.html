@@ -1,0 +1,53 @@
+<div class="w-full flex flex-col p-5 max-w-320 mx-auto">
+  <div class="mb-5 flex justify-start items-center dark:text-white text-black">
+    <h1 class="font-bold text-lg">Lista de Bralhos</h1>
+  </div>
+
+  <div *ngIf="decks?.length! > 0; else noKecks"
+    class="w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <table class="w-full self-center rounded-lg">
+      <tr class="bg-slate-300 rounded-lg">
+        <th class="w-3/12 py-2">Nome</th>
+        <th class="w-1/12 py-2 rounded-tl-lg text-center">Qtde de Cards</th>
+        <th class="w-1/12 py-2 rounded-tl-lg text-center">Qtde de Pokémons</th>
+        <th class="w-1/12 py-2 rounded-tl-lg text-center">Qtde de Trainers</th>
+        <th class="w-3/12 py-2 rounded-tr-lg">Ações</th>
+      </tr>
+
+      <tr class="border-b rounded-lg" *ngFor="let deck of decks">
+        <td class="w-3/12 text-center py-2">
+          <p> {{ deck?.name }}</p>
+        </td>
+
+        <td class="hidden w-1/12 text-center py-2 md:block md:m-auto">
+          <p>{{ deck?.cards }}</p>
+        </td>
+
+        <td class="w-3/12 text-center py-2">
+          <p> {{ deck?.pokemons }}</p>
+        </td>
+
+        <td class="w-3/12 text-center py-2">
+          <p> {{ deck?.trainers }}</p>
+        </td>
+
+        <td class="w-3/12 text-center py-2 rounded-b-lg">
+          <div class="w-full flex gap-2 justify-center">
+            <button class="acoes-button" (click)="editDeck(deck)" title="Editar">
+              <edit-icon></edit-icon>
+            </button>
+            <button class="acoes-button" (click)="deleteDeck(deck.id)" title="Deletar">
+              <delete-icon></delete-icon>
+            </button>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <ng-template #noKecks>
+    <div class="mb-5 flex justify-center items-center w-full">
+      <h1 class="font-bold text-lg dark:text-white text-black">Não há baralhos cadastrados</h1>
+    </div>
+  </ng-template>
+</div>

@@ -3,6 +3,7 @@ export interface Card {
   name: string;
   supertype: string;
   rules?: string[];
+  types?: string[];
   set: Set;
   number: string;
   images: Images;
