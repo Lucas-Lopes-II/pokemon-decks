@@ -1,0 +1,23 @@
+<div class="flex flex-col">
+  <div class="flex justify-between items-center flex-col sm:flex-row ">
+    <button type="button" (click)="onSaveDeck()"
+      class="mb-2 sm:mb-0 text-white bg-green-600 hover:bg-green-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-500 dark:hover:bg-green-600">
+      Salvar Baralho
+    </button>
+
+    <button type="button" (click)="onAddCard()"
+      class="mb-2 sm:mb-0 text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700">
+      Adicionar novos Cards
+    </button>
+  </div>
+
+  <div *ngIf="deckData.cards.length > 0" class="flex flex-col w-full">
+    <h1 class=" mb-2 sm:mb-0 text-lg self-start">
+      Cards do Baralho
+    </h1>
+
+    <div class="card-grid">
+      <card *ngFor="let card of deckData.cards" [cardData]="card"></card>
+    </div>
+  </div>
+</div>

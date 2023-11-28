@@ -18,11 +18,11 @@ const routes: Routes = [
     loadComponent: () =>
       import('./pages/deck-form').then((e) => e.DeckFormComponent),
   },
-  // {
-  //   path: 'deck/:id',
-  //   loadComponent: () =>
-  //     import('./pages/deck-form').then((e) => e.DeckFormComponent),
-  // },
+  {
+    path: 'deck/:id',
+    loadComponent: () =>
+      import('./pages/deck-form').then((e) => e.DeckFormComponent),
+  },
   {
     path: '**',
     pathMatch: 'full',

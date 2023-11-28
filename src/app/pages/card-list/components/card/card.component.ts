@@ -12,4 +12,5 @@ import { Card } from './../../../../shared/interfaces';
 })
 export class CardComponent {
   @Input() public cardData: Card | null = null;
+  @Input() public isAdding: boolean = false;
 }

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { Subject, takeUntil } from 'rxjs';
-import { DeckStorageService } from './services';
+import { DeckStorageService } from '../../shared/services';
 import { Deck, PagedList } from '../../shared/interfaces';
 import { EditIconComponent } from '../../shared/components/edit-icon';
 import { DeleteIconComponent } from './../../shared/components/delete-icon';

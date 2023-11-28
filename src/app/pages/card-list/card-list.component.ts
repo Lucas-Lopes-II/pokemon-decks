@@ -1,10 +1,18 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 
 import { Subject, takeUntil } from 'rxjs';
-import { CardService, CardStorageService } from './services';
+import { CardStorageService } from './services';
 import { CardComponent } from './components/card';
-import { Card, PagedList } from 'src/app/shared/interfaces';
+import { CardService } from '../../shared/services';
+import { Card, PagedList } from '../../shared/interfaces';
 import { PaginatorComponent } from './components/paginator';
 
 @Component({
@@ -23,6 +31,9 @@ export class CardListComponent implements OnDestroy, OnInit {
     count: 0,
     totalCount: 0,
   };
+  @Input() withCache: boolean = true;
+  @Input() public isAdding: boolean = false;
+  @Output() public finishAdd = new EventEmitter();
 
   constructor(
     private readonly cardService: CardService,
@@ -30,13 +41,19 @@ export class CardListComponent implements OnDestroy, OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getDeckList();
+    if (this.withCache) {
+      this.getDeckList();
+    } else {
+      this.getDeckListFromApi();
+    }
   }
 
   ngOnDestroy(): void {
     this.unsubscribeAll.next(null);
     this.unsubscribeAll.complete();
-    this.cardStorageService.setListCardBS(this.cardList);
+    if (this.withCache) {
+      this.cardStorageService.setListCardBS(this.cardList);
+    }
   }
 
   private getDeckList(): void {
@@ -71,5 +88,9 @@ export class CardListComponent implements OnDestroy, OnInit {
 
   public onNext(): void {
     this.getDeckListFromApi(this.cardList.page + 1);
+  }
+
+  onFinishAdd(): void {
+    this.finishAdd.emit();
   }
 }

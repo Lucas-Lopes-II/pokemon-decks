@@ -6,13 +6,21 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { Subject, takeUntil } from 'rxjs';
 import { Deck } from './../../shared/interfaces';
-import { DeckStorageService } from '../deck-list/services';
+import { CardListComponent } from '../card-list';
+import { DeckStorageService } from '../../shared/services';
 import { confirmMessage } from './../../shared/utils/confirm';
+import { DeckCardListComponent } from './components/deck-card-list';
 
 @Component({
   selector: 'deck-form',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    DeckCardListComponent,
+    CardListComponent,
+  ],
   templateUrl: './deck-form.component.html',
   styleUrls: ['./deck-form.component.scss'],
 })
@@ -28,6 +36,7 @@ export class DeckFormComponent implements OnDestroy, OnInit {
     pokemons: 0,
   };
   public decks: Deck[] = [];
+  public isAdding: boolean = false;
 
   constructor(
     private readonly decksStorage: DeckStorageService,
@@ -45,6 +54,7 @@ export class DeckFormComponent implements OnDestroy, OnInit {
   ngOnDestroy(): void {
     this.unsubscribeAll.next(null);
     this.unsubscribeAll.complete();
+    this.decksStorage.setDeckBS(this.decks);
   }
 
   private getDeckList(): void {
@@ -93,4 +103,14 @@ export class DeckFormComponent implements OnDestroy, OnInit {
       );
     }
   }
+
+  public onAddCard(): void {
+    this.isAdding = true;
+  }
+
+  public onFinishAdd(): void {
+    this.isAdding = false;
+  }
+
+  public onSaveDeck(): void {}
 }

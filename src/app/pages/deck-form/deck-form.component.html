@@ -30,11 +30,11 @@
             </p>
 
             <p class="mb-3 text-sm text-gray-700 dark:text-gray-400">
-              Nº de Trainadores: {{ deckData?.trainers }}
+              Nº de Trainadores: {{ deckData.trainers }}
             </p>
 
             <p class="mb-3 text-sm text-gray-700 dark:text-gray-400">
-              Nº de Pokemons: {{ deckData?.pokemons }}
+              Nº de Pokemons: {{ deckData.pokemons }}
             </p>
           </div>
         </div>
@@ -42,4 +42,11 @@
     </div>
   </div>
 
+  <div *ngIf="isAdding" class="w-full">
+    <card-list (finishAdd)="onFinishAdd()" [isAdding]="isAdding" [withCache]="false"></card-list>
+  </div>
+
+  <div *ngIf="!isAdding" class="w-full">
+    <deck-card-list (saveDeck)="onSaveDeck()" (addCard)="onAddCard()" [deckData]="deckData"></deck-card-list>
+  </div>
 </div>
