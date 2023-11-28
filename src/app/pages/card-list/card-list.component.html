@@ -1,0 +1,9 @@
+<div class="w-full flex flex-col p-5 max-w-320 mx-auto h-full">
+  <div class="mb-5 flex justify-start items-center dark:text-white text-black">
+    <h1 class="font-bold text-lg">Lista de Cartas</h1>
+  </div>
+
+  <div class="card-grid">
+    <card class="" *ngFor="let card of cardList.data" [cardData]="card"></card>
+  </div>
+</div>

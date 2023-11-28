@@ -6,12 +6,12 @@ import { DeckListComponent } from './pages/deck-list';
 const routes: Routes = [
   {
     path: 'deck-list',
-    children: [
-      {
-        path: '',
-        component: DeckListComponent,
-      },
-    ],
+    component: DeckListComponent,
+  },
+  {
+    path: 'card-list',
+    loadComponent: () =>
+      import('./pages/card-list').then((e) => e.CardListComponent),
   },
   {
     path: '**',

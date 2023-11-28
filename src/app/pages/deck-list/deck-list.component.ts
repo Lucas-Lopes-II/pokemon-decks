@@ -16,7 +16,7 @@ import { DeleteIconComponent } from './../../shared/components/delete-icon';
   styleUrls: ['./deck-list.component.scss'],
 })
 export class DeckListComponent implements OnDestroy, OnInit {
-  protected unsubscribeAll: Subject<any> = new Subject<any>();
+  private unsubscribeAll: Subject<any> = new Subject<any>();
   public decks: Deck[] = [];
 
   constructor(
