@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { Subject, takeUntil } from 'rxjs';
-import { CardService } from './services';
+import { CardService, CardStorageService } from './services';
 import { CardComponent } from './components/card';
 import { Card, PagedList } from 'src/app/shared/interfaces';
 import { PaginatorComponent } from './components/paginator';
@@ -18,13 +18,16 @@ export class CardListComponent implements OnDestroy, OnInit {
   private unsubscribeAll: Subject<any> = new Subject<any>();
   public cardList: PagedList<Card> = {
     data: [],
-    page: 0,
+    page: 1,
     pageSize: 0,
     count: 0,
     totalCount: 0,
   };
 
-  constructor(private readonly cardService: CardService) {}
+  constructor(
+    private readonly cardService: CardService,
+    private readonly cardStorageService: CardStorageService,
+  ) {}
 
   ngOnInit(): void {
     this.getDeckList();
@@ -33,9 +36,25 @@ export class CardListComponent implements OnDestroy, OnInit {
   ngOnDestroy(): void {
     this.unsubscribeAll.next(null);
     this.unsubscribeAll.complete();
+    this.cardStorageService.setListCardBS(this.cardList);
   }
 
-  private getDeckList(page: number = 1): void {
+  private getDeckList(): void {
+    this.cardStorageService
+      .getListCardBS()
+      .pipe(takeUntil(this.unsubscribeAll))
+      .subscribe({
+        next: (response: PagedList<Card>) => {
+          if (response.data.length > 0) {
+            this.cardList = response;
+          } else {
+            this.getDeckListFromApi();
+          }
+        },
+      });
+  }
+
+  private getDeckListFromApi(page: number = 1): void {
     this.cardService
       .getCards(page)
       .pipe(takeUntil(this.unsubscribeAll))
@@ -47,10 +66,10 @@ export class CardListComponent implements OnDestroy, OnInit {
   }
 
   public onPrevius(): void {
-    this.getDeckList(this.cardList.page - 1);
+    this.getDeckListFromApi(this.cardList.page - 1);
   }
 
   public onNext(): void {
-    this.getDeckList(this.cardList.page + 1);
+    this.getDeckListFromApi(this.cardList.page + 1);
   }
 }

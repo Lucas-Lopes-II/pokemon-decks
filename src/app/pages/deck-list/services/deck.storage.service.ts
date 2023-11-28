@@ -17,6 +17,7 @@ export class DeckStorageService {
   public setDeckBS(deck: Deck[]): void {
     this.deckBS.next(deck);
   }
+
   public getDeckToEditBS(): Observable<Deck | null> {
     return this.deckToEditBS.asObservable();
   }
