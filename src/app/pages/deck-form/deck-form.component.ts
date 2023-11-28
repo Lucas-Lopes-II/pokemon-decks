@@ -5,9 +5,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { Subject, takeUntil } from 'rxjs';
-import { Deck } from './../../shared/interfaces';
+import { Card, Deck } from './../../shared/interfaces';
 import { CardListComponent } from '../card-list';
-import { DeckStorageService } from '../../shared/services';
+import { DeckService, DeckStorageService } from '../../shared/services';
 import { confirmMessage } from './../../shared/utils/confirm';
 import { DeckCardListComponent } from './components/deck-card-list';
 
@@ -31,6 +31,7 @@ export class DeckFormComponent implements OnDestroy, OnInit {
   public deckData: Deck = {
     id: '',
     cards: [],
+    types: [],
     name: '',
     trainers: 0,
     pokemons: 0,
@@ -40,6 +41,7 @@ export class DeckFormComponent implements OnDestroy, OnInit {
 
   constructor(
     private readonly decksStorage: DeckStorageService,
+    private readonly decksService: DeckService,
     private readonly route: ActivatedRoute,
     private readonly router: Router,
   ) {
@@ -104,7 +106,7 @@ export class DeckFormComponent implements OnDestroy, OnInit {
     }
   }
 
-  public onAddCard(): void {
+  public onOpenCardsToAdd(): void {
     this.isAdding = true;
   }
 
@@ -112,5 +114,18 @@ export class DeckFormComponent implements OnDestroy, OnInit {
     this.isAdding = false;
   }
 
-  public onSaveDeck(): void {}
+  public onAddCard(card: Card): void {
+    this.deckData = this.decksService.validateAddCardOnDeck(
+      card,
+      this.deckData,
+    );
+  }
+
+  public onSaveDeck(): void {
+    if (this.deckData.cards.length < 24) {
+      alert('Mínimo de cartas deve ser 24! Por favor, adicione mais cartas.');
+
+      return;
+    }
+  }
 }

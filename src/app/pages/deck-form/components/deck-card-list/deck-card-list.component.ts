@@ -16,15 +16,16 @@ export class DeckCardListComponent {
   @Input() public deckData: Deck = {
     id: '',
     cards: [],
+    types: [],
     name: '',
     trainers: 0,
     pokemons: 0,
   };
-  @Output() public addCard = new EventEmitter();
+  @Output() public openCardsToAdd = new EventEmitter();
   @Output() public saveDeck = new EventEmitter();
 
-  public onAddCard(): void {
-    this.addCard.emit();
+  public onOpenCardsToAdd(): void {
+    this.openCardsToAdd.emit();
   }
 
   public onSaveDeck(): void {

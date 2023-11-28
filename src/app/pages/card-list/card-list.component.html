@@ -13,7 +13,8 @@
   </div>
 
   <div class="card-grid">
-    <card [isAdding]="isAdding" class="" *ngFor="let card of cardList.data" [cardData]="card"></card>
+    <card [isAdding]="isAdding" class="" *ngFor="let card of cardList.data" [cardData]="card"
+      (addCard)="onAddCard($event)"></card>
   </div>
 
   <div class="mt-5">

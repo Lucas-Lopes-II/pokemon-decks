@@ -34,6 +34,7 @@ export class CardListComponent implements OnDestroy, OnInit {
   @Input() withCache: boolean = true;
   @Input() public isAdding: boolean = false;
   @Output() public finishAdd = new EventEmitter();
+  @Output() public addCard = new EventEmitter();
 
   constructor(
     private readonly cardService: CardService,
@@ -92,5 +93,9 @@ export class CardListComponent implements OnDestroy, OnInit {
 
   onFinishAdd(): void {
     this.finishAdd.emit();
+  }
+
+  public onAddCard(card: Card): void {
+    this.addCard.emit(card);
   }
 }

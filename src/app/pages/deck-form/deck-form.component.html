@@ -17,25 +17,34 @@
       </div>
     </div>
 
-    <div class="lg:w-1/2 w-full">
+    <div class="md:w-2/3 lg:w-[40%] xl:w-[35%] w-full self-center">
       <div
-        class=" pr-3 pl-4 sm:pl-10 md:pl-14  py-4 flex flex-col items-center w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+        class=" pr-3 pl-4 sm:pl-8 md:pl-10 lg:pl-12 xl:pl-14 py-4 flex flex-col items-center w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <div class="flex flex-col justify-center items-start w-full">
-          <h5 class="mb-2 text-lg font-bold  text-gray-900 dark:text-white">
+          <h5 class="mb-2 text-base text-gray-900 dark:text-white">
             Informações do Baralho
           </h5>
-          <div>
-            <p class="mb-3 text-sm text-gray-700 dark:text-gray-400">
-              Nº de tipos: 0
-            </p>
 
-            <p class="mb-3 text-sm text-gray-700 dark:text-gray-400">
-              Nº de Trainadores: {{ deckData.trainers }}
-            </p>
+          <div class="flex flex-col sm:flex-row gap-1 sm:gap-6">
+            <div>
+              <p class="mb-3 text-sm text-gray-700 dark:text-gray-400">
+                Nº de cards: {{ deckData.cards.length }}
+              </p>
 
-            <p class="mb-3 text-sm text-gray-700 dark:text-gray-400">
-              Nº de Pokemons: {{ deckData.pokemons }}
-            </p>
+              <p class="mb-3 text-sm text-gray-700 dark:text-gray-400">
+                Nº de tipos: {{ deckData.types.length }}
+              </p>
+            </div>
+
+            <div>
+              <p class="mb-3 text-sm text-gray-700 dark:text-gray-400">
+                Nº de Trainadores: {{ deckData.trainers }}
+              </p>
+
+              <p class="mb-3 text-sm text-gray-700 dark:text-gray-400">
+                Nº de Pokemons: {{ deckData.pokemons }}
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -43,10 +52,12 @@
   </div>
 
   <div *ngIf="isAdding" class="w-full">
-    <card-list (finishAdd)="onFinishAdd()" [isAdding]="isAdding" [withCache]="false"></card-list>
+    <card-list (finishAdd)="onFinishAdd()" [isAdding]="isAdding" [withCache]="false"
+      (addCard)="onAddCard($event)"></card-list>
   </div>
 
   <div *ngIf="!isAdding" class="w-full">
-    <deck-card-list (saveDeck)="onSaveDeck()" (addCard)="onAddCard()" [deckData]="deckData"></deck-card-list>
+    <deck-card-list (saveDeck)="onSaveDeck()" (openCardsToAdd)="onOpenCardsToAdd()"
+      [deckData]="deckData"></deck-card-list>
   </div>
 </div>
