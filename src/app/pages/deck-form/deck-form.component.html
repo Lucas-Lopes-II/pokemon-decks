@@ -1,0 +1,45 @@
+<div class="w-full flex flex-col p-5 max-w-320 mx-auto h-full">
+  <div class="mb-5 w-full flex flex-col lg:flex-row gap-3">
+    <div class="lg:w-1/2 w-full flex flex-col justify-between">
+      <div class="mb-5 flex flex-col sm:flex-row justify-between items-center dark:text-white text-black">
+        <h1 class=" mb-2 sm:mb-0font-bold text-lg">
+          {{ !!id ? 'Edição' : 'Cadastro'}} de Baralho
+        </h1>
+      </div>
+
+      <div>
+        <label for="deck-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+          Nome do Baralho
+        </label>
+        <input type="text" id="deck-name" [formControl]="nameField"
+          class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+          required>
+      </div>
+    </div>
+
+    <div class="lg:w-1/2 w-full">
+      <div
+        class=" pr-3 pl-4 sm:pl-10 md:pl-14  py-4 flex flex-col items-center w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+        <div class="flex flex-col justify-center items-start w-full">
+          <h5 class="mb-2 text-lg font-bold  text-gray-900 dark:text-white">
+            Informações do Baralho
+          </h5>
+          <div>
+            <p class="mb-3 text-sm text-gray-700 dark:text-gray-400">
+              Nº de tipos: 0
+            </p>
+
+            <p class="mb-3 text-sm text-gray-700 dark:text-gray-400">
+              Nº de Trainadores: {{ deckData?.trainers }}
+            </p>
+
+            <p class="mb-3 text-sm text-gray-700 dark:text-gray-400">
+              Nº de Pokemons: {{ deckData?.pokemons }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

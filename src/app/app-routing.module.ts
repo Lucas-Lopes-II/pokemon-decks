@@ -14,6 +14,16 @@ const routes: Routes = [
       import('./pages/card-list').then((e) => e.CardListComponent),
   },
   {
+    path: 'deck-register',
+    loadComponent: () =>
+      import('./pages/deck-form').then((e) => e.DeckFormComponent),
+  },
+  // {
+  //   path: 'deck/:id',
+  //   loadComponent: () =>
+  //     import('./pages/deck-form').then((e) => e.DeckFormComponent),
+  // },
+  {
     path: '**',
     pathMatch: 'full',
     redirectTo: 'deck-list',

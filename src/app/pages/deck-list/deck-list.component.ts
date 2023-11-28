@@ -53,4 +53,8 @@ export class DeckListComponent implements OnDestroy, OnInit {
     const newList = this.decks.filter((deck) => deck.id === deckId);
     this.decksStorage.setDeckBS(newList);
   }
+
+  public registerDeck(): void {
+    this.router.navigate(['deck-register']);
+  }
 }
