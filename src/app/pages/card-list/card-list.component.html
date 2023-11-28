@@ -6,4 +6,9 @@
   <div class="card-grid">
     <card class="" *ngFor="let card of cardList.data" [cardData]="card"></card>
   </div>
+
+  <div class="mt-5">
+    <paginator (next)="onNext()" (previus)="onPrevius()" [page]="cardList.page" [pageSize]="cardList.pageSize"
+      [totalCount]="cardList.totalCount"></paginator>
+  </div>
 </div>

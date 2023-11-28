@@ -3,13 +3,14 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { Subject, takeUntil } from 'rxjs';
 import { CardService } from './services';
-import { Card, PagedList } from 'src/app/shared/interfaces';
 import { CardComponent } from './components/card';
+import { Card, PagedList } from 'src/app/shared/interfaces';
+import { PaginatorComponent } from './components/paginator';
 
 @Component({
   selector: 'card-list',
   standalone: true,
-  imports: [CommonModule, CardComponent],
+  imports: [CommonModule, CardComponent, PaginatorComponent],
   templateUrl: './card-list.component.html',
   styleUrls: ['./card-list.component.scss'],
 })
@@ -34,14 +35,22 @@ export class CardListComponent implements OnDestroy, OnInit {
     this.unsubscribeAll.complete();
   }
 
-  private getDeckList(): void {
+  private getDeckList(page: number = 1): void {
     this.cardService
-      .getCards(1)
+      .getCards(page)
       .pipe(takeUntil(this.unsubscribeAll))
       .subscribe({
         next: (response: PagedList<Card>) => {
           this.cardList = response;
         },
       });
+  }
+
+  public onPrevius(): void {
+    this.getDeckList(this.cardList.page - 1);
+  }
+
+  public onNext(): void {
+    this.getDeckList(this.cardList.page + 1);
   }
 }
