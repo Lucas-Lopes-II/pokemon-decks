@@ -48,9 +48,7 @@ export class DeckFormComponent implements OnDestroy, OnInit {
     this.id = this.route.snapshot.params['id'];
   }
   ngOnInit(): void {
-    if (this.id) {
-      this.getDeckList();
-    }
+    this.getDeckList();
   }
 
   ngOnDestroy(): void {
@@ -66,7 +64,10 @@ export class DeckFormComponent implements OnDestroy, OnInit {
       .subscribe({
         next: (response: Deck[]) => {
           this.decks = response;
-          this.getDeck();
+
+          if (this.id) {
+            this.getDeck();
+          }
         },
       });
   }
@@ -127,5 +128,33 @@ export class DeckFormComponent implements OnDestroy, OnInit {
 
       return;
     }
+
+    if (this.nameField.invalid) {
+      alert('O baralho precisa de um nome');
+
+      return;
+    }
+
+    if (this.id) {
+      this.decks = this.decks.map((deck) => {
+        if (this.id === deck.id) {
+          return {
+            ...deck,
+            ...this.deckData,
+          };
+        }
+        return deck;
+      });
+    } else {
+      const newDeck: Deck = {
+        ...this.deckData,
+        id: String(Date.now()),
+        name: this.nameField.value || '',
+      };
+      this.decks = [...this.decks, newDeck];
+      console.log(this.decks);
+    }
+
+    this.router.navigate(['deck-list']);
   }
 }

@@ -1,8 +1,8 @@
-<div class="w-full flex flex-col p-5 max-w-320 mx-auto h-full">
+<div class="w-full flex flex-col p-5 max-w-[1440px] mx-auto h-full">
   <div class="mb-5 w-full flex flex-col lg:flex-row gap-3">
     <div class="lg:w-1/2 w-full flex flex-col justify-between">
       <div class="mb-5 flex flex-col sm:flex-row justify-between items-center dark:text-white text-black">
-        <h1 class=" mb-2 sm:mb-0font-bold text-lg">
+        <h1 class=" mb-2 sm:mb-0 font-medium  text-lg">
           {{ !!id ? 'Edição' : 'Cadastro'}} de Baralho
         </h1>
       </div>
@@ -25,24 +25,24 @@
             Informações do Baralho
           </h5>
 
-          <div class="flex flex-col sm:flex-row gap-1 sm:gap-6">
+          <div class="flex flex-col sm:flex-row gap-1 sm:gap-16 md:gap-20 lg:gap-16">
             <div>
               <p class="mb-3 text-sm text-gray-700 dark:text-gray-400">
-                Nº de cards: {{ deckData.cards.length }}
+                Cartas: {{ deckData.cards.length }}
               </p>
 
               <p class="mb-3 text-sm text-gray-700 dark:text-gray-400">
-                Nº de tipos: {{ deckData.types.length }}
+                Tipos unicos: {{ deckData.types.length }}
               </p>
             </div>
 
             <div>
               <p class="mb-3 text-sm text-gray-700 dark:text-gray-400">
-                Nº de Trainadores: {{ deckData.trainers }}
+                Trainadores: {{ deckData.trainers }}
               </p>
 
               <p class="mb-3 text-sm text-gray-700 dark:text-gray-400">
-                Nº de Pokemons: {{ deckData.pokemons }}
+                Pokemons: {{ deckData.pokemons }}
               </p>
             </div>
           </div>

@@ -1,6 +1,6 @@
-<div class="w-full flex flex-col p-5 max-w-320 mx-auto h-full">
+<div class="w-full flex flex-col p-5 mx-auto h-full max-w-[1440px]">
   <div class="mb-5 flex flex-col sm:flex-row justify-between items-center dark:text-white text-black">
-    <h1 class=" mb-2 sm:mb-0font-bold text-lg">
+    <h1 class=" mb-2 sm:mb-0 font-medium text-lg">
       Lista de Baralhos
     </h1>
 
@@ -11,39 +11,41 @@
   </div>
 
   <div *ngIf="decks?.length! > 0; else noKecks"
-    class="w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-    <table class="w-full self-center rounded-lg">
+    class="overflow-auto w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <table class="w-full self-center rounded-lg min-w-[1000px]">
       <tr class="bg-slate-300 rounded-lg">
-        <th class="w-3/12 py-2">Nome</th>
-        <th class="w-1/12 py-2 rounded-tl-lg text-center">Qtde de Cards</th>
-        <th class="w-1/12 py-2 rounded-tl-lg text-center">Qtde de Pokémons</th>
-        <th class="w-1/12 py-2 rounded-tl-lg text-center">Qtde de Trainers</th>
+        <th class="w-3/12 py-2 rounded-tl-lg text-center">Nome</th>
+        <th class="w-1/12 py-2 ">Qtde de Cards</th>
+        <th class="w-1/12 py-2 ">Qtde de Pokémons</th>
+        <th class="w-1/12 py-2 ">Qtde de Trainers</th>
         <th class="w-3/12 py-2 rounded-tr-lg">Ações</th>
       </tr>
 
       <tr class="border-b rounded-lg" *ngFor="let deck of decks">
-        <td class="w-3/12 text-center py-2">
+        <td class="w-3/12 text-center py-2 dark:text-white">
           <p> {{ deck?.name }}</p>
         </td>
 
-        <td class="hidden w-1/12 text-center py-2 md:block md:m-auto">
-          <p>{{ deck?.cards }}</p>
+        <td class="w-1/12 text-center py-2 md:m-auto dark:text-white">
+          <p>{{ deck?.cards?.length || 0 }}</p>
         </td>
 
-        <td class="w-3/12 text-center py-2">
+        <td class="w-3/12 text-center py-2 dark:text-white">
           <p> {{ deck?.pokemons }}</p>
         </td>
 
-        <td class="w-3/12 text-center py-2">
+        <td class="w-3/12 text-center py-2 dark:text-white">
           <p> {{ deck?.trainers }}</p>
         </td>
 
         <td class="w-3/12 text-center py-2 rounded-b-lg">
           <div class="w-full flex gap-2 justify-center">
-            <button class="acoes-button" (click)="editDeck(deck)" title="Editar">
+            <button class="acoes-button dark:hover:bg-gray-600 hover:bg-slate-100 rounded-lg p-1"
+              (click)="editDeck(deck)" title="Editar">
               <edit-icon></edit-icon>
             </button>
-            <button class="acoes-button" (click)="deleteDeck(deck.id)" title="Deletar">
+            <button class="acoes-button dark:hover:bg-gray-600 hover:bg-slate-100 rounded-lg p-1"
+              (click)="deleteDeck(deck.id)" title="Deletar">
               <delete-icon></delete-icon>
             </button>
           </div>
