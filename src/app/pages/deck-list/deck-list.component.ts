@@ -3,8 +3,9 @@ import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { Subject, takeUntil } from 'rxjs';
-import { DeckStorageService } from '../../shared/services';
 import { Deck, PagedList } from '../../shared/interfaces';
+import { DeckStorageService } from '../../shared/services';
+import { confirmMessage } from './../../shared/utils/confirm';
 import { EditIconComponent } from '../../shared/components/edit-icon';
 import { DeleteIconComponent } from './../../shared/components/delete-icon';
 
@@ -49,9 +50,17 @@ export class DeckListComponent implements OnDestroy, OnInit {
     this.router.navigate(['deck', deck.id]);
   }
 
-  public deleteDeck(deckId: string): void {
-    const newList = this.decks.filter((deck) => deck.id === deckId);
-    this.decksStorage.setDeckBS(newList);
+  public deleteDeck(deck: Deck): void {
+    confirmMessage(
+      `Deseja exlcuir o Bralho: ${deck.name}?`,
+      () => {
+        const newList = this.decks.filter((d) => d.id !== deck.id);
+        this.decksStorage.setDeckBS(newList);
+      },
+      () => {
+        return;
+      },
+    );
   }
 
   public registerDeck(): void {

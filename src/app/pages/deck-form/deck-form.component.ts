@@ -136,25 +136,38 @@ export class DeckFormComponent implements OnDestroy, OnInit {
     }
 
     if (this.id) {
-      this.decks = this.decks.map((deck) => {
-        if (this.id === deck.id) {
-          return {
-            ...deck,
-            ...this.deckData,
-          };
-        }
-        return deck;
-      });
+      this.decks = this.editedDecks(this.decks);
     } else {
-      const newDeck: Deck = {
-        ...this.deckData,
-        id: String(Date.now()),
-        name: this.nameField.value || '',
-      };
-      this.decks = [...this.decks, newDeck];
-      console.log(this.decks);
+      this.decks = this.addNewDeckInList(this.decks);
     }
 
     this.router.navigate(['deck-list']);
+  }
+
+  private editedDecks(decks: Deck[]): Deck[] {
+    const newDecks = decks.map((deck) => {
+      if (this.id === deck.id) {
+        return {
+          ...deck,
+          ...this.deckData,
+          name: this.nameField.value || '',
+        };
+      }
+
+      return deck;
+    });
+
+    return newDecks;
+  }
+
+  private addNewDeckInList(decks: Deck[]): Deck[] {
+    const newDeck: Deck = {
+      ...this.deckData,
+      id: String(Date.now()),
+      name: this.nameField.value || '',
+    };
+    const newDecks = [...decks, newDeck];
+
+    return newDecks;
   }
 }
