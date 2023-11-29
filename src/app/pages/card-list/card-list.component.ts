@@ -14,6 +14,7 @@ import { CardComponent } from './components/card';
 import { CardService } from '../../shared/services';
 import { Card, PagedList } from '../../shared/interfaces';
 import { PaginatorComponent } from './components/paginator';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'card-list',
@@ -79,6 +80,10 @@ export class CardListComponent implements OnDestroy, OnInit {
       .subscribe({
         next: (response: PagedList<Card>) => {
           this.cardList = response;
+        },
+        error: (err: HttpErrorResponse) => {
+          console.error(err);
+          alert('Ocorreu um erro contate o administrador');
         },
       });
   }
