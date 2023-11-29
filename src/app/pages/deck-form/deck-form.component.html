@@ -28,15 +28,25 @@
           <div class="flex flex-col sm:flex-row gap-1 sm:gap-16 md:gap-20 lg:gap-16">
             <div>
               <p class="mb-3 text-sm text-gray-700 dark:text-gray-400">
-                Cartas: {{ deckData.cards.length }}
-              </p>
-
-              <p class="mb-3 text-sm text-gray-700 dark:text-gray-400">
                 Tipos unicos: {{ deckData.types.length }}
               </p>
+
+              <div class=" text-xs text-gray-700 dark:text-gray-400">
+                <p class="text-sm text-gray-700 dark:text-gray-400">
+                  <strong>Tipo(s):</strong>
+                </p>
+
+                <ul>
+                  <li class="ml-1" *ngFor="let type of deckData.types">- {{ type }}</li>
+                </ul>
+              </div>
             </div>
 
             <div>
+              <p class="mb-3 text-sm text-gray-700 dark:text-gray-400">
+                Cartas: {{ deckData.cards.length }}
+              </p>
+
               <p class="mb-3 text-sm text-gray-700 dark:text-gray-400">
                 Trainadores: {{ deckData.trainers }}
               </p>
