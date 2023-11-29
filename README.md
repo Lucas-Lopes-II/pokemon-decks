@@ -25,12 +25,12 @@ O objetivo deste aplicativo é permitir que os jogadores de Pokemon construam e 
 
 ### Detalhes do Baralho
 
-- **Estatísticas:** Os usuários podem ver quantos Pokémons e cartas de treinador estão no baralho (com base no atributo `supertype`).
-- **Cores/Tipos:** Os usuários podem visualizar quantas cores e tipos únicos estão presentes no baralho.
+- **Estatísticas:** Os usuários podem ver quantos Pokémons e cartas de treinador estão no baralho.
+- **Tipos:** Os usuários podem visualizar quantos tipos únicos estão presentes no baralho.
 
 ## Interface do Usuário
 
-A interface do usuário foi desenvolvida com foco na usabilidade e experiência visual agradável e houve a inclusão do modo Dark e Light.
+A interface do usuário foi desenvolvida com foco na usabilidade e experiência visual agradável e houve a inclusão do modo Light/Dark.
 
 ## :wrench: Tecnologias utilizadas
 
@@ -42,7 +42,7 @@ A interface do usuário foi desenvolvida com foco na usabilidade e experiência 
 
 ## Arquitetura
 
-O projeto foi desenvolvido na arquitetura MVC padrão recomendada pelo [Angular](https://v16.angular.io/docs), com gerenciamento de estado reativo com [RxJS](https://rxjs.dev/api) (lib de programação reativa integrada no angular) e com resposividade, podendo ser utilizado em diversos tipos de dispositivos.
+O projeto foi desenvolvido na arquitetura MVC padrão recomendada pelo [Angular](https://v16.angular.io/docs), bem como com componentes _standalones_ (nova feature lançada no Angular 16). O gerenciamento de estado foi feito de forma reativa com o [RxJS](https://rxjs.dev/api) (lib de programação reativa integrada ao angular). Também, pensando na experiência do usuário, foi incluso o modo Light/Dark e resposividade, fazendo com que o app possa ser utilizado em diverso tipos de dispositivos.
 
 ## Ambiente de Desenvolvimento
 
@@ -53,31 +53,28 @@ O projeto foi desenvolvido no seguinte ambiente:
 
 ## Como Executar o Projeto Localmente
 
-> Para isso você precis ter o [Node, o NPM](https://nodejs.org/en) e o [Git](https://git-scm.com/) instalados.
+> Para isso você precis ter [Node, NPM](https://nodejs.org/en) e [Git](https://git-scm.com/) instalados.
 
 1. Clone este repositório.
 
-- git
-  ```sh
-  git clone https://github.com/Lucas-Lopes-II/pokemon-decks.git
-  ```
+```sh
+git clone https://github.com/Lucas-Lopes-II/pokemon-decks.git
+```
 
 2. Navegue até o diretório do projeto.
 3. Execute `npm install` para instalar as dependências.
 
-- npm
-  ```sh
-  npm install
-  ```
+```sh
+npm install
+```
 
 4. Execute `npm start` para iniciar o servidor de desenvolvimento.
 
-- npm
-  ```sh
-  npm start
-  ```
+```sh
+npm start
+```
 
-5. Seu navegador irá abrir uma janela com: `http://localhost:4200/`.
+5. Seu navegador irá abrir uma janela com: `http://localhost:4200/` onde a aplicação já estará dispinível para uso.
 
 ## Contato
 
