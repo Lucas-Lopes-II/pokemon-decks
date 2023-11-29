@@ -1,3 +1,6 @@
+![main](src/assets/doc/main.gif)
+<br/><br/><br/>
+
 # Pokédex Builder
 
 Este é um projeto de aplicativo web desenvolvido em **[Angular 16](https://v16.angular.io/docs)**, utilizando **Tailwind CSS** e **SCSS** para estilização e **flowbite** para componentes de interface do usuário.
@@ -15,6 +18,9 @@ O objetivo deste aplicativo é permitir que os jogadores de Pokemon construam e 
 - **Remoção:** Os usuários podem remover baralhos existentes.
 - **Edição:** Os usuários podem editar os detalhes de um baralho existente.
 - **Detalhes:** Os usuários podem clicar em um baralho para visualizar informações detalhadas.
+  <br/><br/>
+  ![lista baralho](src/assets/doc/list.gif)
+  <br/><br/>
 
 ### Criação de Baralho
 
@@ -22,11 +28,27 @@ O objetivo deste aplicativo é permitir que os jogadores de Pokemon construam e 
 - **Inserção de Cartas:** Os usuários podem adicionar cartas ao baralho.
 - **Restrições:** Um baralho deve conter no mínimo 24 e no máximo 60 cartas. Não mais que 4 cartas com o mesmo nome são permitidas.
 - **Salvamento:** Após salvar, o usuário é redirecionado para a página de lista de baralhos, que é atualizada.
+  <br/><br/>
+  ![cria baralho](src/assets/doc/create.gif)
+  <br/><br/>
 
 ### Detalhes do Baralho
 
 - **Estatísticas:** Os usuários podem ver quantos Pokémons e cartas de treinador estão no baralho.
 - **Tipos:** Os usuários podem visualizar quantos tipos únicos estão presentes no baralho.
+  <br/><br/>
+  ![detalha baralho](src/assets/doc/det.gif)
+  <br/><br/>
+
+### Dark Mode
+
+![dark mode](src/assets/doc/dark-mode.gif)
+<br/><br/><br/>
+
+### Responsividade
+
+![responsividade](src/assets/doc/resp.gif)
+<br/><br/><br/>
 
 ## Interface do Usuário
 
