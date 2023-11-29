@@ -17,7 +17,8 @@
     </h1>
 
     <div class="card-grid">
-      <card *ngFor="let card of deckData.cards" [cardData]="card"></card>
+      <card *ngFor="let card of deckData.cards" [cardData]="card" [isDeckCard]="isDeckCard"
+        (deleteCard)="onDeleteCard($event)"></card>
     </div>
   </div>
 </div>

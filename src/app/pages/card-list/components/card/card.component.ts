@@ -13,9 +13,15 @@ import { Card } from './../../../../shared/interfaces';
 export class CardComponent {
   @Input() public cardData: Card | null = null;
   @Input() public isAdding: boolean = false;
+  @Input() public isDeckCard: boolean = false;
   @Output() public addCard = new EventEmitter();
+  @Output() public deleteCard = new EventEmitter();
 
   public onAddCard(): void {
     this.addCard.emit(this.cardData);
+  }
+
+  public onDeleteCard(): void {
+    this.deleteCard.emit(this.cardData);
   }
 }

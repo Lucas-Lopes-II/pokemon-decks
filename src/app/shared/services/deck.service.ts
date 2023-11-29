@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { Card, Deck } from 'src/app/shared/interfaces';
+import { confirmMessage } from '../utils/confirm';
 
 @Injectable({
   providedIn: 'root',
@@ -11,13 +12,12 @@ export class DeckService {
       return deck;
     }
 
+    const isTrainer = card.supertype === 'Trainer';
     const newTypes = card.types
       ? [...new Set([...deck.types, ...card.types!])]
       : deck.types;
-    const newPokemonsCount =
-      card.supertype === 'Pokémon' ? deck.pokemons + 1 : deck.pokemons;
-    const newTrainersCount =
-      card.supertype === 'Trainer' ? deck.trainers + 1 : deck.trainers;
+    const newPokemonsCount = !isTrainer ? deck.pokemons + 1 : deck.pokemons;
+    const newTrainersCount = isTrainer ? deck.trainers + 1 : deck.trainers;
 
     const newDeck: Deck = {
       ...deck,
@@ -26,6 +26,12 @@ export class DeckService {
       pokemons: newPokemonsCount,
       trainers: newTrainersCount,
     };
+
+    alert(
+      `Carta do ${isTrainer ? 'Treinador' : 'Pokémon'} ${
+        card.name
+      } adicionado com sucesso!`,
+    );
 
     return newDeck;
   }
@@ -67,5 +73,39 @@ export class DeckService {
     }
 
     return false;
+  }
+
+  public validateDeleteCardOnDeck(card: Card, deck: Deck): Deck {
+    const deckCards = deck.cards;
+    if (deckCards.length <= 24) {
+      alert(
+        'limite mínimo de 24 cartas atingido! Você não pode excluir cartas.',
+      );
+
+      return deck;
+    }
+
+    const resultado = confirm(`Deseja exlcuir o Card: ${card.name}?`);
+    if (resultado) {
+      const newList = deckCards.filter((c) => c.id !== card.id);
+      const isTrainer = card.supertype === 'Trainer';
+      const newTypes = card.types
+        ? [...new Set([...deck.types, ...card.types!])]
+        : deck.types;
+      const newPokemonsCount = !isTrainer ? deck.pokemons - 1 : deck.pokemons;
+      const newTrainersCount = isTrainer ? deck.trainers - 1 : deck.trainers;
+
+      const newDeck: Deck = {
+        ...deck,
+        types: newTypes,
+        cards: newList,
+        pokemons: newPokemonsCount,
+        trainers: newTrainersCount,
+      };
+
+      return newDeck;
+    }
+
+    return deck;
   }
 }

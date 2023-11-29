@@ -28,12 +28,12 @@
           <div class="flex flex-col sm:flex-row gap-1 sm:gap-16 md:gap-20 lg:gap-16">
             <div>
               <p class="mb-3 text-sm text-gray-700 dark:text-gray-400">
-                Tipos unicos: {{ deckData.types.length }}
+                <strong>>Cor(s)/Tipo(s) unicos:</strong> {{ deckData.types.length }}
               </p>
 
               <div class=" text-xs text-gray-700 dark:text-gray-400">
                 <p class="text-sm text-gray-700 dark:text-gray-400">
-                  <strong>Tipo(s):</strong>
+                  <strong>Cor(s)/Tipo(s):</strong>
                 </p>
 
                 <ul>
@@ -44,15 +44,15 @@
 
             <div>
               <p class="mb-3 text-sm text-gray-700 dark:text-gray-400">
-                Cartas: {{ deckData.cards.length }}
+                <strong>Cartas:</strong> {{ deckData.cards.length }}
               </p>
 
               <p class="mb-3 text-sm text-gray-700 dark:text-gray-400">
-                Trainadores: {{ deckData.trainers }}
+                <strong>Trainadores:</strong> {{ deckData.trainers }}
               </p>
 
               <p class="mb-3 text-sm text-gray-700 dark:text-gray-400">
-                Pokemons: {{ deckData.pokemons }}
+                <strong>Pokemons:</strong> {{ deckData.pokemons }}
               </p>
             </div>
           </div>
@@ -62,12 +62,12 @@
   </div>
 
   <div *ngIf="isAdding" class="w-full">
-    <card-list (finishAdd)="onFinishAdd()" [isAdding]="isAdding" [withCache]="false"
-      (addCard)="onAddCard($event)"></card-list>
+    <card-list (finishAdd)="onFinishAdd()" (addCard)="onAddCard($event)" [isAdding]="isAdding"
+      [withCache]="false"></card-list>
   </div>
 
   <div *ngIf="!isAdding" class="w-full">
-    <deck-card-list (saveDeck)="onSaveDeck()" (openCardsToAdd)="onOpenCardsToAdd()"
+    <deck-card-list (saveDeck)="onSaveDeck()" (openCardsToAdd)="onOpenCardsToAdd()" (deleteCard)="onDeleteCard($event)"
       [deckData]="deckData"></deck-card-list>
   </div>
 </div>

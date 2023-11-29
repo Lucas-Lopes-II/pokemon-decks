@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { Deck, PagedList } from 'src/app/shared/interfaces';
 import { CardComponent } from './../../../card-list/components/card';
+import { Card, Deck, PagedList } from '../../../../shared/interfaces';
 import { PaginatorComponent } from './../../../card-list/components/paginator';
 
 @Component({
@@ -21,8 +21,10 @@ export class DeckCardListComponent {
     trainers: 0,
     pokemons: 0,
   };
+  public isDeckCard: boolean = true;
   @Output() public openCardsToAdd = new EventEmitter();
   @Output() public saveDeck = new EventEmitter();
+  @Output() public deleteCard = new EventEmitter<Card>();
 
   public onOpenCardsToAdd(): void {
     this.openCardsToAdd.emit();
@@ -30,5 +32,9 @@ export class DeckCardListComponent {
 
   public onSaveDeck(): void {
     this.saveDeck.emit();
+  }
+
+  public onDeleteCard(card: Card): void {
+    this.deleteCard.emit(card);
   }
 }

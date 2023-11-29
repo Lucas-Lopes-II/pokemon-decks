@@ -5,11 +5,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { Subject, takeUntil } from 'rxjs';
-import { Card, Deck } from './../../shared/interfaces';
 import { CardListComponent } from '../card-list';
-import { DeckService, DeckStorageService } from '../../shared/services';
+import { Card, Deck } from './../../shared/interfaces';
 import { confirmMessage } from './../../shared/utils/confirm';
 import { DeckCardListComponent } from './components/deck-card-list';
+import { DeckService, DeckStorageService } from '../../shared/services';
 
 @Component({
   selector: 'deck-form',
@@ -117,6 +117,13 @@ export class DeckFormComponent implements OnDestroy, OnInit {
 
   public onAddCard(card: Card): void {
     this.deckData = this.decksService.validateAddCardOnDeck(
+      card,
+      this.deckData,
+    );
+  }
+
+  public onDeleteCard(card: Card): void {
+    this.deckData = this.decksService.validateDeleteCardOnDeck(
       card,
       this.deckData,
     );
