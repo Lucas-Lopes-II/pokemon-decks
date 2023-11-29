@@ -1,17 +1,50 @@
 <div
-  class=" py-3 flex flex-col items-center w-[297px] bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-  <a [href]="cardData?.images?.small || ''" target="_blank" class="self-center">
-    <img class="rounded-t-lgn w-20" [src]="cardData?.images?.small || ''" alt="pokemon card" />
-  </a>
-  <div class="flex flex-col justify-center items-center">
-    <h5 class="mb-2 text-lg font-bold  text-gray-900 dark:text-white">
+  class=" py-3 px-3 flex flex-col items-center w-[294px] bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+  <div class="flex justify-center items-start w-full">
+    <h3 class="pt-0 mt-0 mb-2 text-sm font-bold  text-gray-900 dark:text-white">
       {{ cardData?.name }}
-    </h5>
+    </h3>
+  </div>
 
-    <p class="mb-3 text-sm text-gray-700 dark:text-gray-400">
-      SuperType: {{ cardData?.supertype}}
-    </p>
+  <div class="flex gap-2 w-full">
+    <a [href]="cardData?.images?.small || ''" target="_blank" class="self-center w-2/5">
+      <img class="w-20" [src]="cardData?.images?.small || ''" alt="pokemon card" />
+    </a>
 
+    <div class="flex flex-col gap-1 w-3/5">
+      <div class="w-full">
+        <p class="text-xs text-gray-700 dark:text-gray-400 p-0 m-0">
+          <strong>SuperType:</strong> {{ cardData?.supertype}}
+        </p>
+      </div>
+
+      <div *ngIf="cardData?.supertype === 'Pokémon'" class=" text-xs text-gray-700 dark:text-gray-400">
+        <p>
+          <strong>Tipo(s):</strong>
+        </p>
+
+        <ul>
+          <li class="ml-2" *ngFor="let type of cardData?.types">{{ type }}</li>
+        </ul>
+      </div>
+
+      <div class="w-full">
+        <p class="text-xs text-gray-700 dark:text-gray-400 p-0 m-0 flex gap-2">
+          <strong>Simbolo:</strong> <img class="w-5 self-start" [src]="cardData?.set?.images?.symbol || ''"
+            alt="pokemon symbol" />
+        </p>
+      </div>
+
+      <div class="w-full">
+        <p class="mt-1 text-xs text-gray-700 dark:text-gray-400 p-0 m-0 flex gap-2">
+          <strong>Logo:</strong> <img class="w-16 self-center" [src]="cardData?.set?.images?.logo || ''"
+            alt="pokemon logo" />
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex flex-col justify-center items-center mt-3">
     <button *ngIf="isAdding" type="button" (click)="onAddCard()"
       class="mb-2 md:mb-0 text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-xs px-3 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700">
       Adicionar
